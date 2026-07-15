@@ -340,10 +340,7 @@ class MultiHeadAttention(nn.Module):
     # 替换为外部提供的 attention map：形状 [B, NI, NP]
     # 要扩展为多头：[B, H, NI, NP]
             attention_scores = override_attention.unsqueeze(1).repeat(1, self.num_heads, 1, 1)
-        else:
-            # 原 attention_scores 正常计算
-            attention_scores = torch.einsum("bhnc,bhmc->bhnm", q_tokens, k_tokens)
-            attention_scores = attention_scores / self.d_model_per_head ** 0.5
+       
 
 
         # input check
